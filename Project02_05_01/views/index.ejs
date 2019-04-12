@@ -1,0 +1,48 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>Friends</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0">
+		<link rel="stylesheet" href="style.css">
+		<script type="text/javascript" src="main.js"></script>
+	</head>
+
+	<body>
+        <div id="wrapper">
+            <a href="/logout">
+                <button type="button" class="logout">Logout</button>
+            </a>
+            <div id="friends-column" class="column">
+                <h1>Your Followers</h1>
+                               <% console.log("rendered") %>
+
+                <ul id="friends">
+                    <!-- With the embedded Javascript we called -->
+                    <% friends.forEach(function(friend) { %>
+                        <li uid="<%= friend.twitter_id %>" class="friend">
+                            <img class="profile-image" src="<%= friend.profile_image_url %>">
+                            <p>
+                                <span class="name"> 
+                                    <%= friend.name %>
+                                </span>
+                            </p>
+                            <p class="location">
+                                <%= friend.location %>
+                            </p>
+                            <a href="/friends/<%= friend.twitter_id %>/tweets/30"><button uid="<%= friend.twitter_id %>" class="tweets-button tweets" type="button">Show Past tweets</button></a>
+                        </li>
+                        
+                    <% }); %>
+                </ul>
+            </div>
+            <div id="notes-column" class="column">
+                <h1>Notes</h1>
+                <ul id="notes">
+
+                </ul>
+            </div>
+        </div>
+	</body>
+</html>

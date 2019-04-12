@@ -1,0 +1,47 @@
+<!doctype html>
+
+<html>
+	<head>
+		<title>Friends</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0">
+		<link rel="stylesheet" href="/style2.css">
+		<script type="text/javascript" src="main.js"></script>
+	</head>
+
+	<body>
+        <div id="wrapper">
+            <a href="/">
+                <button type="button" class="logout">Go Back</button>
+            </a>
+            <div class="column">
+                <h1><%= tweets[0].name + " Tweets"%></h1>
+                <ul id="friends">
+                    <% tweets.forEach(function(tweet) { %>
+                        <!-- every element that fully loads will run a check that will check the tweet with the database to see if the tweet id is present if it is styles will be changed -->
+                        <li uid="<%= tweet.twitter_id %>" class="friend" onload="checkRetweets()">
+                            <img class="profile-image" src="<%= tweet.profile_image_url %>">
+                            <p>
+                                <span class="name"> 
+                                    <%= tweet.name %>
+                                </span>
+                                <span style="float:right">
+                                    <%= tweet.created_at.slice(0,19) %>
+                                </span>
+                            </p>
+                            <p class="location">
+                                <%= tweet.location %>
+                            </p>
+                            <p class="text">
+                                <%= tweet.text; %>
+                                <form action="/tweets/retweet/<%= tweet.id %>" method="post">
+                                <button class="retweet" tid="<%= tweet.id %>">Retweet</button>
+                                </form>
+                            </p>
+                        </li>
+                    <% }); %>
+                </ul>
+            </div>            
+        </div>
+	</body>
+</html>
